@@ -1,3 +1,5 @@
+export PATH=$PATH:./node_modules/.bin/
+
 ##Steps
 
 ###Install packages
@@ -32,5 +34,11 @@ dev: webpack -wd
         * react for transforming JSX
         * the other two presets for us to safely use JavaScript modern features and not worry about browsers that do not understand them
         
+###Test your setup
+`
+babel-node server.js 
+`
+should print something.
+
 
         
