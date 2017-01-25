@@ -20,3 +20,17 @@
 
 index name is for the starting point in each directory
 
+###Setup scripts in package.json
+start: nodemon --exec babel-node server.js --ignore public/
+* ignore changes under public
+
+dev: webpack -wd
+* set up webpack watch mode and develop mode
+* webpack is to package modules from “entry” to “output” and executing “module loaders”, e.g. babel, along the way as specified in webpack.config.js
+    * .babelrc: to have babel work with selected presets 
+        * this instructs babel to use these three presets
+        * react for transforming JSX
+        * the other two presets for us to safely use JavaScript modern features and not worry about browsers that do not understand them
+        
+
+        
