@@ -1,17 +1,16 @@
 import config from './config';
 import apiRouter from './api';
-
+import serverRender from './serverRender';
 import express from 'express';
 const server = express();
 
 server.set('view engine', 'ejs');
 
-import serverRender from './serverRender';
-
-server.get('/', (req, res) => {
-  serverRender()
+server.get(['/', '/contests/:contestId'], (req, res) => {
+  debugger;
+  serverRender(req.params.contestId)
     .then(
-      ( {initialMarkup, initialData} ) => {
+      ({initialMarkup, initialData}) => {
         res.render('index', {
           initialMarkup,
           initialData
