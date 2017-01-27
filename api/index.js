@@ -15,4 +15,13 @@ router.get('/contests', (req, res) => {
   });
 });
 
+router.get('/contests/:contestId', (req, res) => {
+  let contest = reusableContests[req.params.contestId];
+  contest.description = 'This is the extra description that you can only get from the api call.';
+  res.send({
+    contests: contest
+  });
+});
+
+
 export default router;
