@@ -8,10 +8,11 @@ const pushState = (obj, url) =>
   window.history.pushState(obj, '', url);
 
 class App extends React.Component {
-  state = {
-    pageHeader: 'Naming Contests',
-    contests: this.props.initialContests
+  static propTypes = {
+    initialData: React.PropTypes.object.isRequired
   };
+
+  state = this.props.initialData;
 
   componentDidMount() {
 
@@ -31,20 +32,29 @@ class App extends React.Component {
       .then(contest => {
         this.setState(
           {
-            pageHeader: contest.contestName,
             currentContestId: contest.id,
-            contests :{
+            contests: {
               ...this.state.contests,
-              [contest.id] : contest
+              [contest.id]: contest
             }
           }
         );
       });
   };
 
+  currentContest() {
+    return this.state.contests[this.state.currentContestId];
+  }
+
+  pageHeader() {
+    if (this.state.currentContestId)
+      return this.currentContest().contestName;
+    return 'Naming Contests';
+  }
+
   currentContent() {
     if (this.state.currentContestId) {
-      return <Contest {...this.state.contests[this.state.currentContestId]}/>;
+      return <Contest {...this.currentContest()}/>;
     }
     return <ContestList
       onContestClick={this.fetchContest}
@@ -54,7 +64,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Header message={this.state.pageHeader}/>
+        <Header message={this.pageHeader()}/>
         {this.currentContent()}
       </div>
     );
