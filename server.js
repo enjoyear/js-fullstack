@@ -7,7 +7,6 @@ const server = express();
 server.set('view engine', 'ejs');
 
 server.get(['/', '/contests/:contestId'], (req, res) => {
-  debugger;
   serverRender(req.params.contestId)
     .then(
       ({initialMarkup, initialData}) => {
