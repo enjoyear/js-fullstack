@@ -40,3 +40,8 @@ dev: webpack -wd
 babel-node server.js
 `
 should print something.
+
+###Load data into mongo database
+`
+babel-node loadTestData.js
+`
