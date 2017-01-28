@@ -15,11 +15,14 @@ class App extends React.Component {
   state = this.props.initialData;
 
   componentDidMount() {
-
+    window.onpopstate = (event) => {
+      console.log(event.state);
+      this.setState({currentContestId: (event.state || {}).currentContestId});
+    };
   }
 
   componentWillUnmount() {
-    // clean timers, listeners
+    window.onpopstate = null;
   }
 
   fetchContest = (contestId) => {
